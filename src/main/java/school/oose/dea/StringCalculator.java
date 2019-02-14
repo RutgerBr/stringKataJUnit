@@ -2,16 +2,32 @@ package school.oose.dea;
 
 public class StringCalculator
 {
-    public static void main( String[] args ){}
+    public static void main( String[] args ){
+        var calc = new StringCalculator();
+        calc.bereken("geenCijfer");
+    }
+
+    public int bereken(String s)
+    {
+        var result = 0;
+        try {
+            result = add(s);
+        } catch (geenCijferException e)
+        {
+            System.out.println("geenCijferException");
+        }
+        return result;
+    }
 
     public int add(String numbers) throws geenCijferException
     {
-        var e1 = new geenCijferException;
+        var e1 = new geenCijferException("Geen cijfer!");
         if (numbers.contains("geenCijfer"))
         {
             throw e1;
         }
-        else if ("".equals(numbers))
+        else
+        if ("".equals(numbers))
         {
             return 0;
         }
@@ -19,20 +35,22 @@ public class StringCalculator
         {
             return Integer.parseInt(numbers);
         }
+        else if ("/".equals(String.valueOf(numbers.charAt(0))))
+        {
+            numbers = numbers.replaceAll("[//].*?[\n]", "");
+            numbers = numbers.replaceAll("[//]|[\n]", "");
+            var parts = numbers.split(",");
+            var result = 0;
+
+            for (int i = 0; i < parts.length; i++)
+            {
+                result += Integer.parseInt(parts[i]);
+            }
+            return result;
+        }
         else
         {
-            numbers = numbers.replaceAll("[//]|[\n]|\\;", ",");
-            if (",".equals(numbers.charAt(0)))
-            {
-                int i = 0;
-                while (i < numbers.length() && String.valueOf(numbers.charAt(i)) != ",")
-                {
-                    String commaRemover = String.valueOf(numbers.charAt(i));
-                    commaRemover.replaceAll(",", "");
-                    i++;
-                }
-            }
-            var parts = numbers.split(",");
+            var parts = numbers.split("[\n]|,");
             var result = 0;
 
             for (int i = 0; i < parts.length; i++)

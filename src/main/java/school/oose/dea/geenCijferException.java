@@ -1,8 +1,8 @@
 package school.oose.dea;
 
-public class geenCijferException extends Exception
+class geenCijferException extends Exception
 {
-    public geenCijferException(String geenCijfer)
+    public geenCijferException(String e)
     {
     }
 }
