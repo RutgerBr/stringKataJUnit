@@ -4,18 +4,17 @@ public class StringCalculator
 {
     public static void main( String[] args ){
         var calc = new StringCalculator();
-        calc.bereken("geenCijfer");
-    }
-
-    public int bereken(String s)
-    {
-        var result = 0;
         try {
-            result = add(s);
+            calc.bereken("geenCijfer");
         } catch (geenCijferException e)
         {
             System.out.println("geenCijferException");
         }
+    }
+
+    public int bereken(String s) throws geenCijferException
+    {
+        var result = add(s);
         return result;
     }
 
